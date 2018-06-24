@@ -285,13 +285,17 @@ int view_set_ortho(float result[16], const float left, const float right,
 
 void drawScene(appdata_s* ad)
 {
+	int static rot = 0.0f;
+	rot+=5.0f;
+	if(rot>=360)
+		rot = 0.0f;
         int w, h;
         SDL_GetWindowSize(ad->window, &w, &h);
         glViewport(0, 0, w, h);
         glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         init_matrix(ad->model);
-        rotate_xyz(ad->model, ad->anglePoint.x, ad->anglePoint.y, ad->window_rotation);
+        rotate_xyz(ad->model, ad->anglePoint.x, rot, ad->window_rotation);
 
         multiply_matrix(ad->mvp, ad->view, ad->model);
         glUseProgram(ad->program);
@@ -336,6 +340,9 @@ int main()
         init_shaders(&ad);
         init_matrix(ad.view);
         generateAndBindBuffer(&(ad.vbo));
+
+	glCullFace(GL_BACK);
+	glEnable(GL_CULL_FACE);
 
         float aspect = (width > height ? (float)width/height : (float)height/width);
         if (width > height)
