@@ -1,48 +1,94 @@
 #include <SDL.h>
 #include <GL/gl.h>
- static const float cube_vertices[] = {
+
+static const float cube_colors[] = {
         /* front surface is blue */
-        0.5, 0.5, 0.5, 0.0, 0.0, 1.0,
-        -0.5, -0.5, 0.5, 0.0, 0.0, 1.0,
-        0.5, -0.5, 0.5, 0.0, 0.0, 1.0,
-        0.5, 0.5, 0.5, 0.0, 0.0, 1.0,
-        -0.5, 0.5, 0.5, 0.0, 0.0, 1.0,
-        -0.5, -0.5, 0.5, 0.0, 0.0, 1.0,
+        0.0, 0.0, 1.0,
+        0.0, 0.0, 1.0,
+        0.0, 0.0, 1.0,
+        0.0, 0.0, 1.0,
+        0.0, 0.0, 1.0,
+        0.0, 0.0, 1.0,
         /* left surface is green */
-        -0.5, 0.5, 0.5, 0.0, 1.0, 0.0,
-        -0.5, -0.5, -0.5, 0.0, 1.0, 0.0,
-        -0.5, -0.5, 0.5, 0.0, 1.0, 0.0,
-        -0.5, 0.5, 0.5, 0.0, 1.0, 0.0,
-        -0.5, 0.5, -0.5, 0.0, 1.0, 0.0,
-        -0.5, -0.5, -0.5, 0.0, 1.0, 0.0,
+        0.0, 1.0, 0.0,
+        0.0, 1.0, 0.0,
+        0.0, 1.0, 0.0,
+        0.0, 1.0, 0.0,
+        0.0, 1.0, 0.0,
+        0.0, 1.0, 0.0,
         /* top surface is red */
-        -0.5, 0.5, 0.5, 1.0, 0.0, 0.0,
-        0.5, 0.5, -0.5, 1.0, 0.0, 0.0,
-        -0.5, 0.5, -0.5, 1.0, 0.0, 0.0,
-        -0.5, 0.5, 0.5, 1.0, 0.0, 0.0,
-        0.5, 0.5, 0.5, 1.0, 0.0, 0.0,
-        0.5, 0.5, -0.5, 1.0, 0.0, 0.0,
+        1.0, 0.0, 0.0,
+        1.0, 0.0, 0.0,
+        1.0, 0.0, 0.0,
+        1.0, 0.0, 0.0,
+        1.0, 0.0, 0.0,
+        1.0, 0.0, 0.0,
         /* right surface is yellow */
-        0.5, 0.5, -0.5, 1.0, 1.0, 0.0,
-        0.5, -0.5, 0.5, 1.0, 1.0, 0.0,
-        0.5, -0.5, -0.5, 1.0, 1.0, 0.0,
-        0.5, 0.5, -0.5, 1.0, 1.0, 0.0,
-        0.5, 0.5, 0.5, 1.0, 1.0, 0.0,
-        0.5, -0.5, 0.5, 1.0, 1.0, 0.0,
+        1.0, 1.0, 0.0,
+        1.0, 1.0, 0.0,
+        1.0, 1.0, 0.0,
+        1.0, 1.0, 0.0,
+        1.0, 1.0, 0.0,
+        1.0, 1.0, 0.0,
         /* back surface is cyan */
-        -0.5, 0.5, -0.5, 0.0, 1.0, 1.0,
-        0.5, -0.5, -0.5, 0.0, 1.0, 1.0,
-        -0.5, -0.5, -0.5, 0.0, 1.0, 1.0,
-        -0.5, 0.5, -0.5, 0.0, 1.0, 1.0,
-        0.5, 0.5, -0.5, 0.0, 1.0, 1.0,
-        0.5, -0.5, -0.5, 0.0, 1.0, 1.0,
+        0.0, 1.0, 1.0,
+        0.0, 1.0, 1.0,
+        0.0, 1.0, 1.0,
+        0.0, 1.0, 1.0,
+        0.0, 1.0, 1.0,
+        0.0, 1.0, 1.0,
         /* bottom surface is magenta */
-        -0.5, -0.5, -0.5, 1.0, 0.0, 1.0,
-        0.5, -0.5, 0.5, 1.0, 0.0, 1.0,
-        -0.5, -0.5, 0.5, 1.0, 0.0, 1.0,
-        -0.5, -0.5, -0.5, 1.0, 0.0, 1.0,
-        0.5, -0.5, -0.5, 1.0, 0.0, 1.0,
-        0.5, -0.5, 0.5, 1.0, 0.0, 1.0
+        1.0, 0.0, 1.0,
+        1.0, 0.0, 1.0,
+        1.0, 0.0, 1.0,
+        1.0, 0.0, 1.0,
+        1.0, 0.0, 1.0,
+        1.0, 0.0, 1.0
+};
+ 
+static const float cube_vertices[] = {
+        /* front surface is blue */
+        0.5, 0.5, 0.5,
+        -0.5, -0.5, 0.5,
+        0.5, -0.5, 0.5,
+        0.5, 0.5, 0.5,
+        -0.5, 0.5, 0.5,
+        -0.5, -0.5, 0.5,
+        /* left surface is green */
+        -0.5, 0.5, 0.5,
+        -0.5, -0.5, -0.5,
+        -0.5, -0.5, 0.5,
+        -0.5, 0.5, 0.5,
+        -0.5, 0.5, -0.5,
+        -0.5, -0.5, -0.5,
+        /* top surface is red */
+        -0.5, 0.5, 0.5,
+        0.5, 0.5, -0.5,
+        -0.5, 0.5, -0.5,
+        -0.5, 0.5, 0.5,
+        0.5, 0.5, 0.5,
+        0.5, 0.5, -0.5,
+        /* right surface is yellow */
+        0.5, 0.5, -0.5,
+        0.5, -0.5, 0.5,
+        0.5, -0.5, -0.5,
+        0.5, 0.5, -0.5,
+        0.5, 0.5, 0.5,
+        0.5, -0.5, 0.5,
+        /* back surface is cyan */
+        -0.5, 0.5, -0.5,
+        0.5, -0.5, -0.5,
+        -0.5, -0.5, -0.5,
+        -0.5, 0.5, -0.5,
+        0.5, 0.5, -0.5,
+        0.5, -0.5, -0.5,
+        /* bottom surface is magenta */
+        -0.5, -0.5, -0.5,
+        0.5, -0.5, 0.5,
+        -0.5, -0.5, 0.5,
+        -0.5, -0.5, -0.5,
+        0.5, -0.5, -0.5,
+        0.5, -0.5, 0.5
 };
 
 /* Vertex Shader Source */
@@ -96,6 +142,8 @@ typedef struct appdata {
 
         /* Generate Vertex Buffer */
         unsigned int vbo;
+
+	unsigned int colorBuffer;
 } appdata_s;
 
 int initGL(appdata_s* ad)
@@ -116,16 +164,25 @@ int initGL(appdata_s* ad)
         return (0);
 }
 
-void generateAndBindBuffer(unsigned int *vbo)
+void generateAndBindBuffer(appdata_s* ad)
 {
-        /* Generate buffer object names */
-        glGenBuffers(1, vbo);
+        glGenBuffers(1, &ad->colorBuffer);
+	glGenBuffers(1, &ad->vbo);
 
-        /* Bind a named buffer object */
-        glBindBuffer(GL_ARRAY_BUFFER, *vbo);
+	//vertex position buffer
+        glBindBuffer(GL_ARRAY_BUFFER, (ad->vbo));
+        glBufferData(GL_ARRAY_BUFFER, sizeof(cube_vertices), cube_vertices, GL_STATIC_DRAW);
 
-        /* Creates and initializes a buffer object's data store */
-        glBufferData(GL_ARRAY_BUFFER, 3 * 72 * 4, cube_vertices, GL_STATIC_DRAW);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
+        glEnableVertexAttribArray(0);
+
+	//vertex color buffer
+	glBindBuffer(GL_ARRAY_BUFFER, (ad->colorBuffer));
+	glBufferData(GL_ARRAY_BUFFER, sizeof(cube_colors), cube_colors, GL_STATIC_DRAW);
+
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
+        glEnableVertexAttribArray(1);
+
 }
 
 void init_matrix(float matrix[16])
@@ -300,14 +357,6 @@ void drawScene(appdata_s* ad)
         multiply_matrix(ad->mvp, ad->view, ad->model);
         glUseProgram(ad->program);
 
-        glBindBuffer(GL_ARRAY_BUFFER, ad->vbo);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, 0);
-        glEnableVertexAttribArray(0);
-
-        glBindBuffer(GL_ARRAY_BUFFER, ad->vbo);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)(sizeof(float) * 3));
-        glEnableVertexAttribArray(1);
-
         glUniformMatrix4fv(glGetUniformLocation(ad->program, "mvpMatrix"), 1, GL_FALSE, ad->mvp);
 
         glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -339,7 +388,7 @@ int main()
 	initGL(&ad);
         init_shaders(&ad);
         init_matrix(ad.view);
-        generateAndBindBuffer(&(ad.vbo));
+        generateAndBindBuffer(&ad);
 
 	glCullFace(GL_BACK);
 	glEnable(GL_CULL_FACE);
