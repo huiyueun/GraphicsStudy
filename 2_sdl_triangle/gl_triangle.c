@@ -71,7 +71,6 @@ int main()
  
     SDL_bool isQuit = SDL_FALSE;
  
-//    glPointSize(40);
     while(!isQuit) {
         SDL_Event e;
         if(SDL_PollEvent(&e)) {
